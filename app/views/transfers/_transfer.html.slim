@@ -1,0 +1,7 @@
+tr
+  td = l transfer.created_at.to_date
+  td = transfer.amount > 0 ? transfer.amount : '-'
+  td = transfer.amount < 0 ? -transfer.amount : '-'
+  td = transfer.tags.map(&:name).join ', '
+  td = transfer.title
+  td = transfer.total

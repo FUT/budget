@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 gem 'rails', '3.2.6'
 gem 'pg'
+gem 'simple_form'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -16,6 +17,7 @@ gem 'rolify'
 gem 'simple_form'
 gem 'slim'
 gem 'thin'
+gem 'chart-js-rails'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
@@ -24,6 +26,7 @@ group :development do
   gem 'html2haml'
   gem 'quiet_assets'
   gem 'rails_layout'
+  gem 'pry'
 end
 group :development, :test do
   gem 'factory_girl_rails'

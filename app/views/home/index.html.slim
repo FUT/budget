@@ -1,4 +1,21 @@
-h3 Home
-- @users.each do |user|
-  p
-    | User: #{link_to user.name, user}
+.jumbotron
+  = simple_form_for Transfer.new do |f|
+    = f.input :title
+    = f.input :amount
+    = f.input :tags, collection: Tag.all, as: :select
+    = f.submit 'Submit', class: 'btn btn-success'
+
+table.table
+  thead
+    tr
+      th Date
+      th Income
+      th Expense
+      th Tags
+      th Description
+      th Total
+  tbody
+    = render @transfers
+
+.chart
+  = high_chart 'chart_basic_line', @chart
