@@ -2,7 +2,11 @@ Budget::Application.routes.draw do
   authenticated :user do
     root :to => 'home#index'
   end
-  root :to => "users#sign_in"
+
+  devise_scope :user do
+    root to: "devise/sessions#new"
+  end
+
   devise_for :users
   resources :users
   resources :transfers
