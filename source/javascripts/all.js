@@ -1,1 +1,1 @@
-//= require_tree .
+//= require "plugins"//= require_tree ./angular
