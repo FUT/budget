@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #----------------------------------------------------------------------------
 # Ignore these files when commiting to a git repository.
 #
@@ -96,4 +95,3 @@ pickle-email-*.html
 
 # Ignore .DS_store file
 .DS_Store
->>>>>>> initial for middleman
