@@ -4,6 +4,9 @@
 #= require twitter/bootstrap
 #= require bootstrap
 
+#= require plusone
+#= require client-plusone
+
 #= require d3
 
 #= require select2
