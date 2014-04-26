@@ -7,6 +7,8 @@
 
 #= require select2
 
+#= require pouchdb-2.1.0.min
+
 #= require angular
 #= require angular-route
 #= require ui-bootstrap-tpls-0.10.0
