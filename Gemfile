@@ -14,6 +14,7 @@ gem 'sqlite3'
 gem 'twitter-bootstrap-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'unicorn'
+gem 'd3-rails'
 
 group :development do
   gem 'spring'
