@@ -18,6 +18,7 @@ gem 'unicorn'
 group :development do
   gem 'spring'
   gem 'capistrano-rails'
+  gem 'quiet_assets'
 end
 
 gem 'sdoc', '~> 0.4.0',          group: :doc
