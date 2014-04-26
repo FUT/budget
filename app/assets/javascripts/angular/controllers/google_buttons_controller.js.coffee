@@ -1,6 +1,6 @@
 window.App.controller 'GoogleButtonsController', ($scope, $rootScope, $location) ->
   $scope.$on 'event:google-plus-signin-success', (event, authResult) ->
-    $rootScope.auth = authResult
+    $rootScope.authorized = true
     gapi.client.setApiKey 'AIzaSyD7BFdY33hYiIqziLLehvIlG1Os_rJNgtY'
     $location.path '/dashboard'
     $scope.$apply()

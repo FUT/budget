@@ -1,2 +1,2 @@
-window.App.controller 'HTMLController', ($scope, $rootScope) ->
-  $scope.signOut = -> gapi.auth.signOut()
+window.App.controller 'HTMLController', ($scope, $rootScope, $location) ->
+  $location.path('/') if !gapi.auth
