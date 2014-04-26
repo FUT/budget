@@ -5,7 +5,6 @@
 #= require bootstrap
 
 #= require plusone
-#= require client-plusone
 
 #= require d3
 

@@ -1,2 +1,2 @@
 window.App.controller 'HTMLController', ($scope, $rootScope) ->
-  $scope.a = 1
+  $scope.signOut = -> gapi.auth.signOut()
