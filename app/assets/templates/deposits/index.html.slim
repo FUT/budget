@@ -12,9 +12,9 @@ table.table
     td
       |{{humanizeDate(time)}}
     td
-      a.btn.btn-success  data-ng-click="save({type: 'in'})" Earned
-      |&nbsp;
-      a.btn.btn-danger  data-ng-click="save({type: 'out'})" Spent
+      a data-ng-click="save({type: 'in'})" In
+      |/
+      a data-ng-click="save({type: 'out'})" Out
   tr data-ng-repeat='t in transactions track by $index' data-ng-class="{{t.type}}"
     td.amount
       |{{t.amount}}
@@ -23,4 +23,4 @@ table.table
     td.date
       |{{humanizeDate(t.createdAt)}}
     td
-      a.btn.btn-default data-ng-click='delete(t)' Remove
+      a data-ng-click='delete(t)' remove

@@ -9,14 +9,14 @@
 
   .navbar-collapse.collapse data-collapse="navCollapsed"
     ul.nav.navbar-nav
-      li.active
-        a href="#/dashboard"  Dashboard
-      li
-        a href="#"  Link
-      li
-        a href="#"  Link
+      li data-ng-class="{active: nav == 'dashboard'}"
+        a href="#/dashboard" Dashboard
+      li data-ng-class="{active: nav == 'charts'}"
+        a href="#/charts" Charts
+      li data-ng-class="{active: nav == 'deposits'}"
+        a href="#/deposits" Deposits
 
-    ul.nav.navbar-nav.navbar-right
+    /ul.nav.navbar-nav.navbar-right
       li.active
         a href="./"  Default
       li

@@ -1,41 +1,4 @@
 window.App.factory 'GoogleFile', ->
-  class GoogleFile
-    constructor: (attrs) ->
-      @[key] = value for key, value of attrs
-
-    @getCurrent: (callback) ->
-      if @currentFile
-        callback? @currentFile
-      GoogleFile.all (files) ->
-        @currentFile = files[0]
-        callback? @currentFile
-
-    @create: (data, callback) ->
-      loadClient ->
-
-        requestOptions = prepareRequest data
-        request = gapi.client.request requestOptions
-
-        request.execute (file) ->
-          callback?(new GoogleFile(file))
-
-    @all: (callback) ->
-      loadClient ->
-        gapi.client.drive.files.list().execute (response) ->
-          files = _.map response.items, (item) -> new GoogleFile(item)
-          callback? files
-
-    makeCurrent: ->
-      GoogleFile.currentFile = @
-
-    update: (data, callback) ->
-      loadClient ->
-
-        requestOptions = prepareRequest data, @id
-        request = gapi.client.request requestOptions
-
-        request.execute callback
-
   # utilities
   loadClient = (callback) -> if gapi.client.drive then callback?() else gapi.client.load 'drive', 'v2', callback
 
@@ -65,3 +28,55 @@ window.App.factory 'GoogleFile', ->
       params: { 'uploadType': 'multipart' }
       headers: { 'Content-Type': 'multipart/mixed; boundary="' + boundary + '"' }
       body: multipartRequestBody
+
+  class GoogleFile
+    constructor: (attrs) ->
+      @[key] = value for key, value of attrs
+
+    @getCurrentFile: (callback) ->
+      if @currentFile
+        cajllback? @currentFile
+      GoogleFile.all (files) =>
+        @currentFile = files[0]
+        if @currentFile
+          callback? @currentFile
+        else
+          GoogleFile.create '', (file) =>
+            @currentFile = file
+            callback? @currentFile
+
+    @create: (data, callback) ->
+      loadClient ->
+        requestOptions = prepareRequest data
+        request = gapi.client.request requestOptions
+
+        request.execute (file) ->
+          callback?(new GoogleFile(file))
+
+    @all: (callback) ->
+      loadClient ->
+        gapi.client.drive.files.list().execute (response) ->
+          files = _.map response.items, (item) -> new GoogleFile(item)
+          callback? files
+
+    download: (callback) ->
+      if @downloadUrl
+        accessToken = gapi.auth.getToken().access_token
+        xhr = new XMLHttpRequest()
+        xhr.open 'GET', @downloadUrl
+        xhr.setRequestHeader 'Authorization', 'Bearer ' + accessToken
+        xhr.onload = -> callback xhr.responseText
+        xhr.onerror = -> callback null
+        xhr.send()
+      else
+        callback null
+
+    makeCurrent: ->
+      GoogleFile.currentFile = @
+
+    update: (data, callback) ->
+      loadClient =>
+        requestOptions = prepareRequest data, @id
+        request = gapi.client.request requestOptions
+
+        request.execute callback

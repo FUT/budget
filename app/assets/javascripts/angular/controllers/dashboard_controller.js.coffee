@@ -1,9 +1,14 @@
-window.App.controller 'DashboardController', ($scope, $timeout, Transaction, GoogleFile) ->
-  $scope.newTransaction = new Transaction()
+window.App.controller 'DashboardController', ($scope, $rootScope, $timeout, Transaction, GoogleFile, dump) ->
+  $rootScope.nav = 'dashboard'
 
-  Transaction.all (err, transactions) ->
-    $scope.$apply ->
-      $scope.transactions = transactions
+  $scope.newTransaction = new Transaction()
+  $scope.dump = dump
+
+  $scope.$watch 'dump.loaded', (loaded) ->
+    if loaded
+      Transaction.all (err, transactions) ->
+        $scope.$apply ->
+          $scope.transactions = transactions
 
   $scope.delete = (transaction) ->
     transaction.delete ->
@@ -15,7 +20,9 @@ window.App.controller 'DashboardController', ($scope, $timeout, Transaction, Goo
     $scope.newTransaction.createdAt = Date.now()
     Transaction.create $scope.newTransaction, (err, transaction) ->
       $scope.$apply ->
+        $scope.transactions ||= []
         $scope.transactions.unshift transaction
+        $scope.newTransaction = new Transaction()
 
   do tick = ->
     $scope.time = Date.now()

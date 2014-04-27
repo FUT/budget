@@ -1,5 +1,22 @@
-window.App.factory 'Transaction', ->
+window.App.factory 'Transaction', ($timeout, dump) ->
   db = new PouchDB 'transactions'
+  db.allDocs (err, response) =>
+    for item in response.rows
+      db.get item.id, (err, doc) ->
+        db.remove doc, (err, item) ->
+
+  savePending = false
+  saveChanges = ->
+    savePending = false
+    Transaction.all (err, items) ->
+      dump.tables['transactions'] = items
+      dump.saveDump()
+
+  db.changes
+    live: true
+    onChange: (change) ->
+      $timeout saveChanges, 500 unless savePending
+      savePending = true
 
   class Transaction
     constructor: (attrs) ->
@@ -28,23 +45,3 @@ window.App.factory 'Transaction', ->
     delete: (callback) ->
       db.remove @, (err, doc) ->
         callback err, new Transaction(doc)
-
-  # Transaction.create {a:2}, (err, doc) ->
-  #   q = doc
-  #   console.log q
-
-
-  #   Transaction.get q._id, (err, doc) ->
-  #     q = doc
-  #     console.log q
-
-  #     q.update a: 49, (err,doc) ->
-  #       q = doc
-  #       console.log q
-  #       debugger
-
-  #       q.delete (err, doc) ->
-  #         q = doc
-  #         console.log q
-  #         debugger
-
