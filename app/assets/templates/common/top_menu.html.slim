@@ -17,5 +17,5 @@
         a href="#/deposits" Deposits
 
     ul.nav.navbar-nav.navbar-right
-      li.google-drive data-ng-class="{pending: dump.savePending}"
+      li.google-drive data-ng-class="{pending: !dump.saved}"
         = image_tag 'google_drive.png'

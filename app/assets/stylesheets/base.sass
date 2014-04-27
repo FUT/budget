@@ -1,3 +1,11 @@
++keyframes(spin)
+  0%
+    transform: rotate(0deg)
+    -webkit-transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+    -webkit-transform: rotate(360deg)
+
 body
   &>.container
     margin-top: 10px
@@ -16,3 +24,7 @@ body
           -webkit-filter: grayscale(100%)
           -moz-filter: grayscale(100%)
           filter: grayscale(100%)
+
+          -webkit-animation: spin 5s linear infinite
+          -moz-animation: spin 5s linear infinite
+          animation: spin 5s linear infinite
