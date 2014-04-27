@@ -5,6 +5,8 @@ window.App.factory 'Transaction', ->
     constructor: (attrs) ->
       @[key] = value for key, value of attrs
 
+    @db: db
+
     @all: (callback) ->
       db.allDocs { include_docs: true }, (err, response) ->
         transactions = _.map response.rows, (row) -> new Transaction(row.doc)

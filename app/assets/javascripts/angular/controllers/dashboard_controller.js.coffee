@@ -1,4 +1,4 @@
-window.App.controller 'DashboardController', ($scope, $timeout, gDrive, Transaction) ->
+window.App.controller 'DashboardController', ($scope, $timeout, Transaction, GoogleFile) ->
   $scope.newTransaction = new Transaction()
 
   Transaction.all (err, transactions) ->
