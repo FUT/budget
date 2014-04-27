@@ -1,6 +1,7 @@
 #= require jquery
 #= require jquery_ujs
 
+#= require underscore
 #= require plusone
 
 #= require d3

@@ -1,2 +1,26 @@
-h1 qweqwe
-|{{a}}Kj
+table.table
+  tr
+    th Amount
+    th Tag
+    th Date
+    th Actions
+  tr.new-transaction
+    td
+      input type='number' data-ng-model='newTransaction.amount'
+    td
+      input data-ng-model='newTransaction.tag'
+    td
+      |{{humanizeDate(time)}}
+    td
+      a data-ng-click="save({type: 'in'})" In
+      |/
+      a data-ng-click="save({type: 'out'})" Out
+  tr data-ng-repeat='t in transactions track by $index' data-ng-class="{{t.type}}"
+    td.amount
+      |{{t.amount}}
+    td.tag
+      |{{t.tag}}
+    td.date
+      |{{humanizeDate(t.createdAt)}}
+    td
+      a data-ng-click='delete(t)' remove
