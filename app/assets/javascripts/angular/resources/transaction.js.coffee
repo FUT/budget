@@ -1,22 +1,18 @@
 window.App.factory 'Transaction', ($timeout, dump) ->
   db = new PouchDB 'transactions'
+
+  # clear database
   db.allDocs (err, response) =>
     for item in response.rows
       db.get item.id, (err, doc) ->
         db.remove doc, (err, item) ->
 
-  savePending = false
-  saveChanges = ->
-    savePending = false
-    Transaction.all (err, items) ->
-      dump.tables['transactions'] = items
-      dump.saveDump()
-
   db.changes
     live: true
     onChange: (change) ->
-      $timeout saveChanges, 500 unless savePending
-      savePending = true
+      Transaction.all (err, items) ->
+        dump.tables['transactions'] = items
+        dump.saveDump()
 
   class Transaction
     constructor: (attrs) ->

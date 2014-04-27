@@ -16,10 +16,6 @@
       li data-ng-class="{active: nav == 'deposits'}"
         a href="#/deposits" Deposits
 
-    /ul.nav.navbar-nav.navbar-right
-      li.active
-        a href="./"  Default
-      li
-        a href="../navbar-static-top/"  Static top
-      li
-        a href="../navbar-fixed-top/"  Fixed top
+    ul.nav.navbar-nav.navbar-right
+      li.google-drive data-ng-class="{pending: dump.savePending}"
+        = image_tag 'google_drive.png'

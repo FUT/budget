@@ -1,6 +1,7 @@
-window.App.service 'dump', ($rootScope, GoogleFile)->
+window.App.service 'dump', ($rootScope, $timeout, GoogleFile)->
   tables: {}
   loaded: 0
+  savePending: false
   loadDump: ->
     GoogleFile.getCurrentFile (file) =>
       file.download (data) =>
@@ -12,6 +13,13 @@ window.App.service 'dump', ($rootScope, GoogleFile)->
             $rootScope.$apply()
 
   saveDump: ->
-    GoogleFile.getCurrentFile (file) =>
-      file.update JSON.stringify(@tables), =>
-        console.log 'Changes were saved!'
+    return if @savePending
+
+    $rootScope.$apply =>
+      @savePending = true
+    $timeout =>
+      @savePending = false
+      GoogleFile.getCurrentFile (file) =>
+        file.update JSON.stringify(@tables), =>
+          console.log 'Changes were saved!'
+    , 500
