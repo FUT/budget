@@ -1,26 +1,27 @@
-table.table
-  tr
-    th Amount
-    th Tag
-    th Date
-    th Actions
-  tr.new-transaction
-    td
-      input type='number' data-ng-model='newTransaction.amount'
-    td
-      input data-ng-model='newTransaction.tag'
-    td
-      |{{humanizeDate(time)}}
-    td
-      a.btn.btn-success  data-ng-click="save({type: 'in'})" Earned
-      |&nbsp;
-      a.btn.btn-danger  data-ng-click="save({type: 'out'})" Spent
-  tr data-ng-repeat='t in transactions track by $index' data-ng-class="{{t.type}}"
-    td.amount
-      |{{t.amount}}
-    td.tag
-      |{{t.tag}}
-    td.date
-      |{{humanizeDate(t.createdAt)}}
-    td
-      a.btn.btn-default data-ng-click='delete(t)' Remove
+#dashboard
+  table.table
+    tr
+      th Date
+      th Amount
+      th Tag
+      th Actions
+    tr.new-transaction
+      td
+        |{{humanizeDate(time)}}
+      td
+        input type='number' data-ng-model='newTransaction.amount'
+      td
+        input data-ng-model='newTransaction.tag'
+      td
+        a.btn.btn-success  data-ng-click="save({type: 'earned'})" Earned
+        |&nbsp;OR&nbsp;
+        a.btn.btn-danger  data-ng-click="save({type: 'spent'})" Spent
+    tr data-ng-repeat='t in transactions track by $index' class="{{t.type}}"
+      td.date
+        |{{humanizeDate(t.createdAt)}}
+      td.amount
+        |{{t.amount}}
+      td.tag
+        |{{t.tag}}
+      td
+        a.btn.btn-default data-ng-click='delete(t)' Remove
