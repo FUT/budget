@@ -9,6 +9,7 @@ gem 'sass-rails', '~> 4.0.1'
 gem 'slim-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'unicorn'
+gem 'rails_serve_static_assets'
 
 group :development do
   gem 'pry'
