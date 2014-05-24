@@ -15,3 +15,29 @@ window.App.controller 'ChartsOpenBalanceController', ($scope, $rootScope, $timeo
 
   chart = new google.visualization.AreaChart(document.getElementById('open-balance-chart'))
   chart.draw(data, options)
+
+##EXAMPLE
+
+  # Transaction.all (transactions) ->
+  #   points = [['Date', 'Income', 'Expenses']]
+  #   income = 0
+  #   expenses = 0
+
+  #   for transaction in transactions
+  #     if transaction.amount > 0
+  #       income += transaction.amount
+  #     else
+  #       expenses -= transaction.amount
+  #     points.push [transaction.timestamp, income, expenses]
+
+  #   data = google.visualization.arrayToDataTable(points)
+
+  #   options = {
+  #     title: 'Personal Income and Expenses',
+  #     hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
+  #     vAxis: {minValue: 0}
+  #   }
+
+  #   tag = document.getElementById 'open-balance-chart'
+  #   chart = new google.visualization.AreaChart(tag)
+  #   chart.draw(data, options)
