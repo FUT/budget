@@ -33,6 +33,20 @@ window.App.factory 'GoogleFile', ->
     constructor: (attrs) ->
       @[key] = value for key, value of attrs
 
+    @all: (callback) ->
+      loadClient ->
+        gapi.client.drive.files.list().execute (response) ->
+          files = _.map response.items, (item) -> new GoogleFile(item)
+          callback? files
+
+    @create: (data, callback) ->
+      loadClient ->
+        requestOptions = prepareRequest data
+        request = gapi.client.request requestOptions
+
+        request.execute (file) ->
+          callback?(new GoogleFile(file))
+
     @getCurrentFile: (callback) ->
       if @currentFile
         cajllback? @currentFile
@@ -44,20 +58,6 @@ window.App.factory 'GoogleFile', ->
           GoogleFile.create '', (file) =>
             @currentFile = file
             callback? @currentFile
-
-    @create: (data, callback) ->
-      loadClient ->
-        requestOptions = prepareRequest data
-        request = gapi.client.request requestOptions
-
-        request.execute (file) ->
-          callback?(new GoogleFile(file))
-
-    @all: (callback) ->
-      loadClient ->
-        gapi.client.drive.files.list().execute (response) ->
-          files = _.map response.items, (item) -> new GoogleFile(item)
-          callback? files
 
     download: (callback) ->
       if @downloadUrl

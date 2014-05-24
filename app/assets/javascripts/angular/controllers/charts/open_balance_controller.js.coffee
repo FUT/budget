@@ -1,15 +1,15 @@
 window.App.controller 'ChartsOpenBalanceController', ($scope, $rootScope, $timeout) ->
   data = google.visualization.arrayToDataTable([
-    ['Year', 'Sales', 'Expenses'],
-    ['2013',  1000,      400],
-    ['2014',  1170,      460],
-    ['2015',  660,       1120],
-    ['2016',  1030,      540]
+    ['Date', 'Income', 'Expenses'],
+    ['2014/1',  1000,      400],
+    ['2014/2',  2170,      1460],
+    ['2014/3',  3660,      2120],
+    ['2014/4',  4030,      2540]
   ])
 
   options = {
-    title: 'Company Performance',
-    hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
+    title: 'Overall budget income and expenses',
+    hAxis: {title: 'Date',  titleTextStyle: {color: '#333'}},
     vAxis: {minValue: 0}
   }
 

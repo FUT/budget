@@ -1,14 +1,12 @@
 window.App.controller 'PieIncomesController', ($scope, $rootScope, $timeout) ->
   data = google.visualization.arrayToDataTable([
-    ['Task', 'Hours per Day'],
-    ['Work',     11],
-    ['Eat',      2],
-    ['Commute',  2],
-    ['Watch TV', 2],
-    ['Sleep',    7]
+    ['Tag', ''],
+    ['Work',     1121],
+    ['Deposit',  255],
+    ['Hobby',    17]
   ])
 
-  options = title: 'My Daily Activities'
+  options = title: 'Income by tag'
 
   chart = new google.visualization.PieChart(document.getElementById('pie-incomes'))
   chart.draw(data, options)

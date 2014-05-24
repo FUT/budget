@@ -1,14 +1,14 @@
 window.App.controller 'PieExpensesController', ($scope, $rootScope, $timeout) ->
   data = google.visualization.arrayToDataTable([
-    ['Task', 'Hours per Day'],
-    ['Work',     11],
-    ['Eat',      2],
-    ['Commute',  2],
-    ['Watch TV', 2],
-    ['Sleep',    7]
+    ['Tag', ''],
+    ['Transport',     121],
+    ['Food',      83],
+    ['Flat',  255],
+    ['Fun', 123],
+    ['Hobby',    17]
   ])
 
-  options = title: 'My Daily Activities'
+  options = title: 'Expenses by tag'
 
   chart = new google.visualization.PieChart(document.getElementById('pie-expenses'))
   chart.draw(data, options)
